@@ -1,0 +1,6 @@
+IF DB_ID('HouseCostDb') IS NULL
+BEGIN
+    CREATE DATABASE HouseCostDb;
+END;
+GO
+
