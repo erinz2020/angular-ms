@@ -1,78 +1,82 @@
-<main class="page">
-  <section class="calculator">
-    <div class="intro">
-      <p>Developer Fee Calculator</p>
-      <h1>House Construction Cost Calculator</h1>
-      <span>Enter developer-provided project data, call the Spring Boot API, and save the calculation to SQL Server.</span>
+<main class="min-h-screen px-4 py-8 sm:px-6 lg:px-8">
+  <section class="mx-auto grid max-w-6xl grid-cols-1 items-start gap-7 lg:grid-cols-[minmax(0,1fr)_420px]">
+    <div class="pt-4 lg:pt-8">
+      <p class="mb-3 text-sm font-bold uppercase tracking-wide text-teal-700">Developer Fee Calculator</p>
+      <h1 class="mb-4 max-w-2xl text-4xl font-bold leading-tight text-slate-950 sm:text-5xl">
+        House Construction Cost Calculator
+      </h1>
+      <span class="block max-w-xl text-base leading-7 text-slate-600">
+        Enter developer-provided project data, call the Spring Boot API, and save the calculation to SQL Server.
+      </span>
     </div>
 
-    <form [formGroup]="form" (ngSubmit)="calculate()" class="form">
-      <label>
+    <form [formGroup]="form" (ngSubmit)="calculate()" class="grid gap-4 rounded-lg border border-slate-200 bg-white p-6 shadow-xl shadow-slate-200/70">
+      <label class="grid gap-1.5 text-sm font-bold text-slate-700">
         Land area
-        <input type="number" formControlName="landArea">
+        <input class="w-full rounded-md border border-slate-300 px-3 py-2.5 text-slate-950 outline-none transition focus:border-teal-700 focus:ring-4 focus:ring-teal-700/15" type="number" formControlName="landArea">
       </label>
 
-      <label>
+      <label class="grid gap-1.5 text-sm font-bold text-slate-700">
         Building area
-        <input type="number" formControlName="buildingArea">
+        <input class="w-full rounded-md border border-slate-300 px-3 py-2.5 text-slate-950 outline-none transition focus:border-teal-700 focus:ring-4 focus:ring-teal-700/15" type="number" formControlName="buildingArea">
       </label>
 
-      <label>
+      <label class="grid gap-1.5 text-sm font-bold text-slate-700">
         Number of floors
-        <input type="number" formControlName="floors">
+        <input class="w-full rounded-md border border-slate-300 px-3 py-2.5 text-slate-950 outline-none transition focus:border-teal-700 focus:ring-4 focus:ring-teal-700/15" type="number" formControlName="floors">
       </label>
 
-      <label>
+      <label class="grid gap-1.5 text-sm font-bold text-slate-700">
         Construction cost per square meter
-        <input type="number" formControlName="constructionCostPerSqm">
+        <input class="w-full rounded-md border border-slate-300 px-3 py-2.5 text-slate-950 outline-none transition focus:border-teal-700 focus:ring-4 focus:ring-teal-700/15" type="number" formControlName="constructionCostPerSqm">
       </label>
 
-      <label>
+      <label class="grid gap-1.5 text-sm font-bold text-slate-700">
         Permit rate
-        <input type="number" step="0.01" formControlName="permitRate">
+        <input class="w-full rounded-md border border-slate-300 px-3 py-2.5 text-slate-950 outline-none transition focus:border-teal-700 focus:ring-4 focus:ring-teal-700/15" type="number" step="0.01" formControlName="permitRate">
       </label>
 
-      <label>
+      <label class="grid gap-1.5 text-sm font-bold text-slate-700">
         Utility connection fee
-        <input type="number" formControlName="utilityFee">
+        <input class="w-full rounded-md border border-slate-300 px-3 py-2.5 text-slate-950 outline-none transition focus:border-teal-700 focus:ring-4 focus:ring-teal-700/15" type="number" formControlName="utilityFee">
       </label>
 
-      <label>
+      <label class="grid gap-1.5 text-sm font-bold text-slate-700">
         Inspection fee
-        <input type="number" formControlName="inspectionFee">
+        <input class="w-full rounded-md border border-slate-300 px-3 py-2.5 text-slate-950 outline-none transition focus:border-teal-700 focus:ring-4 focus:ring-teal-700/15" type="number" formControlName="inspectionFee">
       </label>
 
-      <button type="submit" [disabled]="loading">
+      <button class="rounded-md bg-teal-700 px-4 py-3 font-bold text-white transition hover:bg-teal-800 disabled:cursor-wait disabled:opacity-70" type="submit" [disabled]="loading">
         {{ loading ? 'Calculating...' : 'Calculate cost' }}
       </button>
     </form>
 
-    <section *ngIf="result" class="result">
-      <h2>Calculation result #{{ result.id }}</h2>
-      <dl>
-        <div>
-          <dt>Base construction cost</dt>
-          <dd>{{ result.baseConstructionCost | currency }}</dd>
+    <section *ngIf="result" class="rounded-lg border border-slate-200 bg-white p-6 shadow-xl shadow-slate-200/70 lg:col-span-2">
+      <h2 class="mb-4 text-xl font-bold text-slate-950">Calculation result #{{ result.id }}</h2>
+      <dl class="grid gap-3">
+        <div class="flex justify-between gap-5 border-b border-slate-100 pb-3">
+          <dt class="text-slate-600">Base construction cost</dt>
+          <dd class="font-bold text-slate-950">{{ result.baseConstructionCost | currency }}</dd>
         </div>
-        <div>
-          <dt>Permit fee</dt>
-          <dd>{{ result.permitFee | currency }}</dd>
+        <div class="flex justify-between gap-5 border-b border-slate-100 pb-3">
+          <dt class="text-slate-600">Permit fee</dt>
+          <dd class="font-bold text-slate-950">{{ result.permitFee | currency }}</dd>
         </div>
-        <div>
-          <dt>Utility connection fee</dt>
-          <dd>{{ result.utilityFee | currency }}</dd>
+        <div class="flex justify-between gap-5 border-b border-slate-100 pb-3">
+          <dt class="text-slate-600">Utility connection fee</dt>
+          <dd class="font-bold text-slate-950">{{ result.utilityFee | currency }}</dd>
         </div>
-        <div>
-          <dt>Inspection fee</dt>
-          <dd>{{ result.inspectionFee | currency }}</dd>
+        <div class="flex justify-between gap-5 border-b border-slate-100 pb-3">
+          <dt class="text-slate-600">Inspection fee</dt>
+          <dd class="font-bold text-slate-950">{{ result.inspectionFee | currency }}</dd>
         </div>
-        <div class="total">
-          <dt>Total cost</dt>
-          <dd>{{ result.totalCost | currency }}</dd>
+        <div class="flex justify-between gap-5 text-xl">
+          <dt class="font-bold text-slate-700">Total cost</dt>
+          <dd class="font-bold text-teal-700">{{ result.totalCost | currency }}</dd>
         </div>
       </dl>
     </section>
 
-    <p *ngIf="error" class="error">{{ error }}</p>
+    <p *ngIf="error" class="font-bold text-red-700 lg:col-span-2">{{ error }}</p>
   </section>
 </main>
